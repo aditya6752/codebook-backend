@@ -9,6 +9,7 @@ const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const multer = require("multer");
 const path = require("path");
+const cors = require('cors');
 dotenv.config();
 //database connection
 mongoose.connect("mongodb://127.0.0.1:27017/dummy?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true}, ()=>{
@@ -17,6 +18,12 @@ mongoose.connect("mongodb://127.0.0.1:27017/dummy?retryWrites=true&w=majority",{
 
 //middleware
 app.use("/images", express.static(path.join(__dirname,"public/images")));
+app.use(cors());
+// app.use(function(req, res, next) {
+//   res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   next();
+// });
 app.use(express.json());
 app.use(helmet());
 app.use(morgan("common"));

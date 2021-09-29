@@ -13,8 +13,7 @@ router.post("/register", async function (req, res) {
         const user = await new User({
             name: req.body.name,
             email: req.body.email,
-            password:hashedPassword ,
-            mobile: req.body.mobile,
+            password:hashedPassword
         });
         //message passed for suuccseefull user registration
 
