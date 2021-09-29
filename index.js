@@ -9,15 +9,17 @@ const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const multer = require("multer");
 const path = require("path");
+const cors = require('cors');
 dotenv.config();
 //database connection
-mongoose.connect("mongodb://127.0.0.1:27017/dummy?retryWrites=true&w=majority",{useNewUrlParser:true,useUnifiedTopology:true}, ()=>{
+mongoose.connect(process.env.MONGO_URL,{useNewUrlParser:true,useUnifiedTopology:true}, ()=>{
     console.log("Connected to DATABASE")
 });
 
 //middleware
 app.use("/images", express.static(path.join(__dirname,"public/images")));
 app.use(express.json());
+app.use(cors());
 app.use(helmet());
 app.use(morgan("common"));
 
